@@ -1,8 +1,16 @@
-# ComposeCoursePart1
+# ComposeCourse
 
-## In this part I've used
-
+## Part 1
+---------
+### In this part I've used
 - MutableState
 - TextField
 - Scaffold
 - Snackbar
+
+## Part 2
+---------
+### In this part I've used
+- LazyCoulmn
+- ConstraintLayout
+
