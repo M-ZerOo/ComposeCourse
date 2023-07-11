@@ -15,3 +15,9 @@
 ## Part 3
 ### In this part I've used
 - Animation
+
+## Part 4
+### In this part I've used
+- LaunchEffect
+- Canvas
+- Custom CircularProgressBar
