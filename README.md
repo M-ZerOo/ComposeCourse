@@ -20,4 +20,11 @@
 ### In this part I've used
 - LaunchEffect
 - Canvas
+### Output
 - Custom CircularProgressBar
+
+## Part 5
+### In this part I've used
+- Canvas
+### Output
+- Custom MusicKnob
