@@ -12,3 +12,6 @@
 - LazyCoulmn
 - ConstraintLayout
 
+## Part 3
+### In this part I've used
+- Animation
