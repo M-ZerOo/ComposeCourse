@@ -28,3 +28,12 @@
 - Canvas
 ### Output
 - Custom MusicKnob
+
+## Part 6
+### In this part I've used
+- BottomNavigationBar
+
+## Part 7
+### In this part I've used
+- NavigationDrawer
+- TopAppBar
