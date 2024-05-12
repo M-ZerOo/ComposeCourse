@@ -14,6 +14,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,13 +24,39 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.melfouly.composecourse.composables.InfoCard
 import com.melfouly.composecourse.composables.ProfileAvatar
 import com.melfouly.composecourse.composables.ProfileHeader
 import com.melfouly.composecourse.ui.theme.Green
 
+
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(
+    viewModel: ProfileViewModel = hiltViewModel()
+) {
+    val state by viewModel.state.collectAsState()
+    ProfileContent(
+        state,
+        viewModel::onChangeFirstName,
+        viewModel::onChangeLastName,
+        viewModel::onChangeLocation,
+        viewModel::onChangeEmail,
+        viewModel::onChangePhone,
+        viewModel::saveUserInfo
+    )
+}
+
+@Composable
+private fun ProfileContent(
+    state: ProfileUiState,
+    onChangeFirstName: (String) -> Unit,
+    onChangeLastName: (String) -> Unit,
+    onChangeLocation: (String) -> Unit,
+    onChangeEmail: (String) -> Unit,
+    onChangePhone: (String) -> Unit,
+    saveUserInfo: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -43,7 +71,9 @@ fun ProfileScreen() {
         )
 
         Text(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(bottom = 8.dp),
             text = "Change profile picture",
             fontWeight = FontWeight.SemiBold,
             fontSize = 14.sp,
@@ -56,24 +86,32 @@ fun ProfileScreen() {
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             Box(modifier = Modifier.weight(1f)) {
-                InfoCard(label = "First Name", data = "Mahmoud")
+                InfoCard(
+                    label = "First Name",
+                    data = state.firstName,
+                    onTextChange = onChangeFirstName
+                )
             }
 
             Spacer(modifier = Modifier.width(16.dp))
 
             Box(modifier = Modifier.weight(1f)) {
-                InfoCard(label = "Last Name", data = "Reda")
+                InfoCard(
+                    label = "Last Name",
+                    data = state.lastName,
+                    onTextChange = onChangeLastName
+                )
             }
         }
 
-        InfoCard(label = "Location", data = "Egypt, Giza")
-        InfoCard(label = "Email", data = "abcxxx@gmail.com")
-        InfoCard(label = "Phone", data = "+200000000")
+        InfoCard(label = "Location", data = state.location, onTextChange = onChangeLocation)
+        InfoCard(label = "Email", data = state.email, onTextChange = onChangeEmail)
+        InfoCard(label = "Phone", data = state.phone, onTextChange = onChangePhone)
 
         Spacer(modifier = Modifier.weight(1f))
 
         Button(
-            onClick = {},
+            onClick = saveUserInfo,
             modifier = Modifier
                 .fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
