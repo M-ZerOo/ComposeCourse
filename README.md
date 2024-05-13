@@ -37,3 +37,10 @@
 ### In this part I've used
 - NavigationDrawer
 - TopAppBar
+
+## Part 8
+### In this part I've used
+- Hilt Dependency Injection
+- ViewModel
+### Output
+- Creating dynamic profile screen 
