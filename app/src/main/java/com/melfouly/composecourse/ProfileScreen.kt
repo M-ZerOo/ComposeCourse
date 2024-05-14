@@ -25,14 +25,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.melfouly.composecourse.composables.InfoCard
 import com.melfouly.composecourse.composables.ProfileAvatar
 import com.melfouly.composecourse.composables.ProfileHeader
 import com.melfouly.composecourse.ui.theme.Green
+import com.melfouly.composecourse.viewmodel.ProfileViewModel
 
 
 @Composable
 fun ProfileScreen(
+    navController: NavController,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
@@ -43,7 +46,7 @@ fun ProfileScreen(
         viewModel::onChangeLocation,
         viewModel::onChangeEmail,
         viewModel::onChangePhone,
-        viewModel::saveUserInfo
+        saveUserInfo = { navController.navigateToSaveInfoScreen(it) }
     )
 }
 
@@ -55,7 +58,7 @@ private fun ProfileContent(
     onChangeLocation: (String) -> Unit,
     onChangeEmail: (String) -> Unit,
     onChangePhone: (String) -> Unit,
-    saveUserInfo: () -> Unit
+    saveUserInfo: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -111,7 +114,7 @@ private fun ProfileContent(
         Spacer(modifier = Modifier.weight(1f))
 
         Button(
-            onClick = saveUserInfo,
+            onClick = { saveUserInfo(state.firstName) },
             modifier = Modifier
                 .fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
@@ -128,6 +131,4 @@ private fun ProfileContent(
 
 @Preview(showSystemUi = true)
 @Composable
-fun Preview() {
-    ProfileScreen()
-}
+fun Preview() {}

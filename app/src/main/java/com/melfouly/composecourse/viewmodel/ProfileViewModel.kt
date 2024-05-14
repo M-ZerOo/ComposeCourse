@@ -1,6 +1,7 @@
-package com.melfouly.composecourse
+package com.melfouly.composecourse.viewmodel
 
 import androidx.lifecycle.ViewModel
+import com.melfouly.composecourse.ProfileUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -31,10 +32,6 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
 
     fun onChangePhone(newValue: String) {
         _state.update { it.copy(phone = newValue) }
-    }
-
-    fun saveUserInfo() {
-
     }
 
 }
